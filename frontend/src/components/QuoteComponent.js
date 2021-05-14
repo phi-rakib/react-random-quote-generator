@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { quotes } from "./../http/api/quotes";
+import ButtonComponent from "./ButtonComponent";
+import HeaderComponent from "./HeaderComponent";
+import SingleQuoteComponent from "./SingleQuoteComponent";
 
 function QuoteComponent() {
   const [quoteList, setQuoteList] = useState([]);
@@ -17,19 +20,15 @@ function QuoteComponent() {
     setQuote(quoteList[idx]);
   };
 
-  let content = quote.body.length > 0 ? `"${quote.body}" - ${quote.author}` : "";
+  const header = "Random Quotes Generator";
 
   return (
     <div className="ui placeholder segment">
-      <div className="ui icon header"><h1>Random Quotes Generator</h1></div>
-      <div className="ui inverted center aligned segment">
-        <h3>{content}</h3>
-      </div>
-      <div className="inline">
-        <div className="ui primary button" onClick={getRandomQuote}>
-          Get Random Quote
-        </div>
-      </div>
+      <HeaderComponent>{header}</HeaderComponent>
+      <SingleQuoteComponent quote={quote} />
+      <ButtonComponent getRandomQuote={getRandomQuote}>
+        Get Random Quote
+      </ButtonComponent>
     </div>
   );
 }
