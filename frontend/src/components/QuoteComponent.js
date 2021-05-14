@@ -3,6 +3,7 @@ import { quotes } from "./../http/api/quotes";
 import ButtonComponent from "./ButtonComponent";
 import HeaderComponent from "./HeaderComponent";
 import SingleQuoteComponent from "./SingleQuoteComponent";
+import { getRandomNumber } from "./../helper";
 
 function QuoteComponent() {
   const [quoteList, setQuoteList] = useState([]);
@@ -10,11 +11,12 @@ function QuoteComponent() {
   const [prevIndex, setPrevIndex] = useState(-1);
 
   useEffect(() => {
+    console.log("get quotes");
     setQuoteList(quotes);
   }, []);
 
   const getRandomQuote = () => {
-    let idx = Math.floor(Math.random() * quoteList.length);
+    let idx = getRandomNumber(0, quoteList.length);
     idx = idx === prevIndex ? (idx + 1) % (quoteList.length - 1) : idx;
     setPrevIndex(idx);
     setQuote(quoteList[idx]);
